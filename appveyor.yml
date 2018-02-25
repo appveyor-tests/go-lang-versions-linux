@@ -4,7 +4,10 @@ test_script:
     for v in "${GO_VERSIONS[@]}"; do
         gvm use ${v} ||
             { echo "[ERROR] Cannot use ${v}." 1>&2; exit 1; }
-        if [[ ! $(go version) =~ ${v} ]]; then
+        go version
+        if [[ $(go version) =~ ${v} ]]; then
+            echo "Version is Correct"
+        else
             echo "Version of go is incorrect!" 1>&2;
             exit 2;
         fi
