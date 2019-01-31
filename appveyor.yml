@@ -5,6 +5,7 @@ init:
  - sh: lsb_release -d
  
 test_script:
+- sh: go version
 - sh: |
     declare GO_VERSIONS=( "go1.7" "go1.8" "go1.9" "go1.10" "go1.11" )
     for v in "${GO_VERSIONS[@]}"; do
