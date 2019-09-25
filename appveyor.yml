@@ -3,19 +3,38 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  - sh: lsb_release -d
- 
+ - sh: |
+    # Only use colors if connected to a terminal
+    if [ -t 1 ]; then
+      RED=$(printf '\033[31m')
+      GREEN=$(printf '\033[32m')
+      YELLOW=$(printf '\033[33m')
+      BLUE=$(printf '\033[34m')
+      BOLD=$(printf '\033[1m')
+      RESET=$(printf '\033[m')
+      NC=$(printf '\033[m')
+    else
+      RED=""
+      GREEN=""
+      YELLOW=""
+      BLUE=""
+      BOLD=""
+      RESET=""
+      NC=""
+    fi
+    
 test_script:
 - sh: go version
 - sh: |
     declare GO_VERSIONS=( "go1.7" "go1.8" "go1.9" "go1.10" "go1.11" "go1.12" "go1.13" )
     for v in "${GO_VERSIONS[@]}"; do
         gvm use ${v} ||
-            { echo "[ERROR] Cannot use ${v}." 1>&2; exit 1; }
+            { echo "${RED}[ERROR] Cannot use ${v}.${NC}" 1>&2; exit 1; }
         go version
         if [[ $(go version) =~ ${v} ]]; then
-            echo "Version is Correct"
+            echo "${GREEN}Version is Correct${NC}"
         else
-            echo "Version of go is incorrect!" 1>&2;
+            echo "${RED}Version of go is incorrect!${NC}" 1>&2;
             exit 2;
         fi
     done
