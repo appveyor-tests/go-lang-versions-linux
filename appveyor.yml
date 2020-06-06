@@ -3,7 +3,7 @@ init:
  - ps: Update-AppveyorBuild -Message "Image '$env:APPVEYOR_BUILD_WORKER_IMAGE'@'$env:APPVEYOR_BUILD_WORKER_CLOUD' cloud. $env:APPVEYOR_REPO_COMMIT_MESSAGE"
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
- - sh: lsb_release -d
+ #- sh: lsb_release -d
  - sh: |
     # Only use colors if connected to a terminal
     if [ -t 1 ]; then
@@ -27,7 +27,7 @@ init:
 test_script:
 - sh: go version
 - sh: |
-    declare GO_VERSIONS=( "go1.7" "go1.8" "go1.9" "go1.10" "go1.11" "go1.12" "go1.13" )
+    declare GO_VERSIONS=( "go1.7" "go1.8" "go1.9" "go1.10" "go1.11" "go1.12" "go1.13" "go1.14" )
     for v in "${GO_VERSIONS[@]}"; do
         gvm use ${v} ||
             { echo "${RED}[ERROR] Cannot use ${v}.${NC}" 1>&2; exit 1; }
