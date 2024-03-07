@@ -4,6 +4,9 @@ init:
  - sh: echo $APPVEYOR_BUILD_WORKER_IMAGE
  - sh: echo $APPVEYOR_BUILD_WORKER_CLOUD
  #- sh: lsb_release -d
+ - sh: type cd
+ - sh: unset -f cd
+ - sh: type cd
  - sh: |
     # Only use colors if connected to a terminal
     if [ -t 1 ]; then
