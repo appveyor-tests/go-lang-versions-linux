@@ -1,4 +1,4 @@
-image: Previous Ubuntu2004
+image: Previous Ubuntu2204
 
 init:
  - appveyor version
@@ -9,6 +9,7 @@ init:
  #- sh: type cd
  #- sh: unset -f cd
  #- sh: type cd
+ - sh: df -h
  - sh: |
     # Only use colors if connected to a terminal
     if [ -t 1 ]; then
