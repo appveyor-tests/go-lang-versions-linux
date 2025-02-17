@@ -29,7 +29,7 @@ test_script:
 - gvm list
 - sh: go version
 - sh: |
-    declare GO_VERSIONS=( "go1.14" "go1.15" "go1.16" "go1.17" "go1.18" "go1.19" )
+    declare GO_VERSIONS=( "go1.16" "go1.17" "go1.18" "go1.19" "go1.20" "go1.21" "go1.22" "go1.23" "go1.24" )
     for v in "${GO_VERSIONS[@]}"; do
         gvm use ${v} ||
             { echo "${RED}[ERROR] Cannot use ${v}.${NC}" 1>&2; exit 1; }
